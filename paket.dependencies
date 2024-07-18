@@ -1,0 +1,10 @@
+source https://api.nuget.org/v3/index.json
+storage: none
+
+nuget FSharp.Data
+nuget Microsoft.Playwright
+nuget Microsoft.Bcl.AsyncInterfaces 6.0.0
+nuget System.Runtime.CompilerServices.Unsafe 6.0.0
+nuget System.Text.Json
+#nuget System.Linq
+#nuget System.Threading.Tasks

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--<PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarnOn>3390;$(WarnOn)</WarnOn>
+  </PropertyGroup>-->
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <!--<TargetFrameworks>net472; net8; net8.0-windows7.0, netstandard2.0</TargetFrameworks>-->
+    <OutputType>Library</OutputType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <OptionCompare>Text</OptionCompare>
+    <WarningsAsErrors>0025;3239;FS0001;FS0020;FS0025;FS0026;FS0193;FS0049</WarningsAsErrors>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>fischorg.PlaywrightUtilities</PackageId>
+    <Title>Playwright Utilities</Title>
+    <VersionPrefix>1.0.23</VersionPrefix>
+    <Description>
+      Convenience methods for using Playwright in F# (i.e. TryRepeatedly, tryStep)
+    </Description>
+    <RepositoryUrl>https://github.com/fischgeek/PlaywrightUtilities</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PreBuildEvent>del C:\DEV\temp\HP\*bin_Debug_AlphaCommScraper_*</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PreBuildEvent>del C:\DEV\temp\HP\*bin_Release_AlphaCommScraper_*</PreBuildEvent>
+    <PreBuildEvent>del C:\DEV\temp\HP\C__Dev_Releases_AlphaCommScraper_*</PreBuildEvent>
+  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <FSharpCoreResourcesFiles Include="$(OutputPath)**\Terminal.Gui.resources.dll" />
+      <FSharpCoreResourcesFiles Include="$(OutputPath)**\FSharp.Core.resources.dll" />
+      <FSharpCoreResourcesDirs Include="@(FSharpCoreResourcesFiles-&gt;'\%(Directory)') " />
+    </ItemGroup>
+    <RemoveDir Directories="@(FSharpCoreResourcesDirs)" />
+  </Target>
+  <ItemGroup>
+    <Compile Include="Config.fs" />
+    <Compile Include="Types.fs" />
+    <Compile Include="Utilities.fs" />
+    <None Include="paket.references" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>
