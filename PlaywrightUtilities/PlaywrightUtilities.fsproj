@@ -22,7 +22,7 @@
     <IsPackable>true</IsPackable>
     <PackageId>fischorg.PlaywrightUtilities</PackageId>
     <Title>Playwright Utilities</Title>
-    <VersionPrefix>1.0.24</VersionPrefix>
+    <VersionPrefix>1.0.25</VersionPrefix>
     <Description>
       Convenience methods for using Playwright in F# (i.e. TryRepeatedly, tryStep)
     </Description>
